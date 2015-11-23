@@ -1,0 +1,40 @@
+sudo apt-get install python-dev libx11-dev libxt-dev libgtk2.0-dev  libncurses5  ncurses-dev build-essential cmake git ruby ruby-dev
+
+
+
+##
+## this will configure it with python 2
+##
+@:~> ./configure \
+    --enable-perlinterp \
+    --enable-pythoninterp \
+    --enable-rubyinterp \
+    --enable-cscope \
+    --enable-gui=auto \
+    --enable-gtk2-check \
+    --enable-gnome-check \
+    --with-features=huge \
+    --enable-multibyte \
+    --with-x \
+    --with-compiledby="Fuguang Wang" \
+    --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu
+##
+## and with python 3
+##
+@:~> ./configure \
+    --enable-perlinterp \
+    --enable-python3interp \
+    --enable-rubyinterp \
+    --enable-cscope \
+    --enable-gui=auto \
+    --enable-gtk2-check \
+    --enable-gnome-check \
+    --with-features=huge \
+    --enable-multibyte \
+    --with-x \
+    --with-compiledby="Fuguang Wang" \
+    --with-python3-config-dir=/usr/lib/python3.3/config-3.3m-x86_64-linux-gnu
+
+
+## check the python support: lanunch vim and type the command 
+    :echo has("python")
