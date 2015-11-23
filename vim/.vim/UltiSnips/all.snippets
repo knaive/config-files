@@ -1,0 +1,13 @@
+global !p
+import datetime
+def currentDateTime():
+    now = datetime.datetime.now()
+    return now.strftime("%Y-%m-%d %H:%M:%S")
+endglobal
+
+snippet info "information about the author and the file" b
+file	    :  `!p snip.rv = fn`
+Author      :  Wang Fuguang <wfg2008913@126.com>
+Date & Time :  `!p snip.rv = currentDateTime()`
+Description :  ${1:Test}
+endsnippet
