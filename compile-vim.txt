@@ -38,3 +38,9 @@ sudo apt-get install python-dev libx11-dev libxt-dev libgtk2.0-dev  libncurses5 
 
 ## check the python support: lanunch vim and type the command 
     :echo has("python")
+
+
+# set vimruntime path
+ $VIMRUNTIME/syntax/syntax.vim
+ where VIMRUNTIME is the dir ~/vim-DIR/runtime/
+
