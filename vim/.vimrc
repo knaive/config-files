@@ -16,7 +16,9 @@ map <C-F11> :cs add ~/.cscopedb/cscope.out
 
 "common command remappings
 "default leader key is \, remap that
+" let mapleader="\<space>"
 let mapleader=","
+set timeoutlen=500 ttimeoutlen=10
 exe 'nnoremap <leader>ev :e ' . VIMRC . '<CR>'
 exe 'nnoremap <leader>sv :so ' . VIMRC . '<CR>'
 nnoremap <C-s> :w<CR>
@@ -31,6 +33,11 @@ nnoremap <C-t> :tabnew
 nnoremap ; :
 ""<C-wq> quit the window
 "autocmd FileType c,cpp,h,java inoremap ; ;<cr>
+
+nnoremap <Leader>hh <C-W>h
+nnoremap <Leader>jj <C-W>j
+nnoremap <Leader>kk <C-W>k
+nnoremap <Leader>ll <C-W>l
 
 ""*************************basic mappings end here****************************
 
@@ -102,16 +109,15 @@ set tabstop=4 shiftwidth=4 expandtab
 set foldenable
 " the foldmethod setting for python
 " set foldmethod=manual
-" the methods of classes is folded but internal statements not
-" use space toggle fold
 set foldmethod=indent
+" the methods of classes is folded but internal statements not
 set foldnestmax=2
+" use space toggle fold
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc':'zo')<CR>
 
 " save info of fold
 au BufWinLeave *.java,*.c,*.cpp,*.tex,*.py,*.vimrc silent mkview
 au BufWinEnter *.java,*.c,*.cpp,*.tex,*.py,*.vimrc silent loadview
-
 
 "*************************basic settings end here***************************
 
@@ -130,8 +136,9 @@ call vundle#begin(VIM_PATH . 'bundle')
 
 " original repos on github
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'AutoClose'
+Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
+Plugin 'jiangmiao/auto-pairs'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -143,32 +150,22 @@ Plugin 'mattn/emmet-vim'
 Plugin 'vim-scripts/a.vim'
 Plugin 'bling/vim-airline'
 Plugin 'cocopon/iceberg.vim'
-Plugin 'scrooloose/syntastic'
+" Plugin 'ciaranm/inkpot'
 
-"" plugins not working well in windows
 if has('unix')
-    Plugin 'scrooloose/nerdtree'
-    Plugin 'Rip-Rip/clang_complete'
-    Plugin 'oplatek/Conque-Shell'
-    Plugin 'basilgor/vim-autotags'
-    "" color scheme for vim in terminal
-    Plugin 'godlygeek/csapprox'
+    "" plugins not working well in windows
     Plugin 'Valloric/YouCompleteMe'
-
-    " plugin VimOrganizer and its assistant plugins
-    " Plugin 'hsitz/VimOrganizer'
-    " Plugin 'mattn/calendar-vim'
-    " Plugin 'chrisbra/NrrwRgn'
-    " Plugin 'utl.vim'
+    " color scheme for vim in terminal
+    Plugin 'godlygeek/csapprox'
+    Plugin 'basilgor/vim-autotags'
 else
     Plugin 'klen/python-mode'
+    " YouCompleteMe obsolete supertab
     Plugin 'ervandew/supertab'
 endif
 
-" Plugin 'tmhedberg/SimpylFold'
 " Plugin 'winmanager'
 " Plugin 'taglist.vim'
-" Plugin 'tcl.vim'
 " Plugin 'jcf/vim-latex'
 
 call vundle#end()
@@ -179,9 +176,10 @@ filetype plugin indent on
 
 
 "*****************auto complete plugins settings begins here*********
+let g:AutoPairsFlyMode = 1
 
 " supertab settings
-let g:SuperTabDefaultCompletionType = "context" "自动检测需要补全什么内容
+" let g:SuperTabDefaultCompletionType = "context" "自动检测需要补全什么内容
 
 " ctrlp mappings
 " <F5>             : update the cache for the current directory
@@ -199,34 +197,17 @@ let g:SuperTabDefaultCompletionType = "context" "自动检测需要补全什么�
 " Ctrlp settings
 let g:ctrlp_show_hidden = 1
 "let g:ctrlp_map = '<Leader>t'
-nmap <Leader>f :CtrlPBuffer<CR>
-nmap <Leader>m :CtrlPMRU<CR>
-"nmap <C-b> :CtrlPBuffer<CR>
-"nmap <C-m> :CtrlPMRU<CR>
+nnoremap <Leader>ff :CtrlPBuffer<CR>
+nnoremap <Leader>mm :CtrlPMRU<CR>
 
 " nerdcommenter
 let g:NERDSpaceDelims=1
-
-" clang_complete settings
-let g:clang_snippets        = 1
-let g:clang_snippets_engine = 'ultisnips'
-let g:clang_complete_auto   = 1
-let g:clang_library_path = '/usr/lib/llvm-3.4/lib'
 
 " python mode
 " without this folder settings, errors may happen
 " let g:pymode_rope_project_root = "~/.ropeproject"
 " let g:pymode_lint_checker = "pyflakes"
 " let g:pymode_rope_lookup_project = 0
-
-" syntastic settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
 
 "youcompleteme settings
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
@@ -240,12 +221,12 @@ let g:UltiSnipsExpandTrigger = "<C-j>"
 "***************auto complete plugins setting ends here**************
 
 " NERDTree settings
-noremap <silent> <Leader>nt :NERDTreeToggle<CR>
+nnoremap <silent> <Leader>tt :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 
 " winmanager settings
 let g:winManagerWindowLayout='FileExplorer|TagList'
-noremap <silent> <Leader>wm :WMToggle<cr>
+nnoremap <silent> <Leader>wm :WMToggle<cr>
 
 " taglist settings
 let Tlist_Sort_Type = "name"            " sort by name
@@ -254,7 +235,7 @@ let Tlist_Compact_Format = 1            " reduce the number of empty lines in th
 let Tlist_Exist_OnlyWindow = 1          " when one buffer left, close the window while killed the buffer
 let Tlist_File_Fold_Auto_Close = 0      " not close tags of other files
 let Tlist_Enable_Fold_Column = 0        " not show the fold tree
-noremap <silent> <Leader>tl :TlistToggle<CR>
+nnoremap <silent> <Leader>tl :TlistToggle<CR>
 
 " extensions to the plugin godlygeek/tabular
 function! s:align()
@@ -267,11 +248,11 @@ function! s:align()
     call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
   endif
 endfunction
-inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+" inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 
 
 " vimim settings
-let g:vimim_cloud='google,sogou'
+" let g:vimim_cloud='google,sogou'
 
 " airline settings
 let g:airline_theme = 'bubblegum'
@@ -281,13 +262,16 @@ let g:airline_theme = 'bubblegum'
 set t_Co=256
 let g:CSApprox_attr_map = {'bold':'bold','italic':'','sp':''}
 set background=dark
-"colorscheme darkeclipse
-colorscheme iceberg
+" colorscheme darkeclipse
+" colorscheme iceberg
+" colorscheme inkpot
+colorscheme github
+" colorscheme dawn
 
 "ConqueTerm settings
-noremap <silent> <Leader>cv :ConqueTermVSplit bash<CR>
-noremap <silent> <Leader>ct  :ConqueTerm bash<CR>
-noremap <silent> <Leader>cb :ConqueTermTab bash<CR>
+nnoremap <silent> <Leader>cv :ConqueTermVSplit bash<CR>
+nnoremap <silent> <Leader>ct  :ConqueTerm bash<CR>
+nnoremap <silent> <Leader>cb :ConqueTermTab bash<CR>
 
 
 "vim-latex settings
@@ -308,7 +292,7 @@ let g:Tex_ViewRule_pdf = 'evince'
 
 
 " tcl plugin
-let tcl_extended_syntax=1
+" let tcl_extended_syntax=1
 
 "" vimOrganizer settings
 "===================================================================
