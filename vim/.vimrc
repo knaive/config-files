@@ -151,22 +151,10 @@ Plugin 'vim-scripts/a.vim'
 Plugin 'bling/vim-airline'
 Plugin 'cocopon/iceberg.vim'
 " Plugin 'ciaranm/inkpot'
-
-if has('unix')
-    "" plugins not working well in windows
-    Plugin 'Valloric/YouCompleteMe'
-    " color scheme for vim in terminal
-    Plugin 'godlygeek/csapprox'
-    Plugin 'basilgor/vim-autotags'
-else
-    Plugin 'klen/python-mode'
-    " YouCompleteMe obsolete supertab
-    Plugin 'ervandew/supertab'
-endif
-
-" Plugin 'winmanager'
-" Plugin 'taglist.vim'
-" Plugin 'jcf/vim-latex'
+Plugin 'Valloric/YouCompleteMe'
+" color scheme for vim in terminal
+Plugin 'godlygeek/csapprox'
+Plugin 'basilgor/vim-autotags'
 
 call vundle#end()
 
@@ -202,12 +190,6 @@ nnoremap <Leader>mm :CtrlPMRU<CR>
 
 " nerdcommenter
 let g:NERDSpaceDelims=1
-
-" python mode
-" without this folder settings, errors may happen
-" let g:pymode_rope_project_root = "~/.ropeproject"
-" let g:pymode_lint_checker = "pyflakes"
-" let g:pymode_rope_lookup_project = 0
 
 "youcompleteme settings
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
@@ -267,29 +249,6 @@ set background=dark
 " colorscheme inkpot
 colorscheme github
 " colorscheme dawn
-
-"ConqueTerm settings
-nnoremap <silent> <Leader>cv :ConqueTermVSplit bash<CR>
-nnoremap <silent> <Leader>ct  :ConqueTerm bash<CR>
-nnoremap <silent> <Leader>cb :ConqueTermTab bash<CR>
-
-
-"vim-latex settings
-"in windows, this make latex work correctly, but may disable vundle
-set shellslash 
-
-"grep sometimes do not display the filename when searching in a singe file. This will confuse Latex-Suite
-"make grep always generate a filename
-set grepprg=grep\ -nH\ $* 
-
-" In Vim 7, the filetype of empty .tex files defaults to 'plaintex' instead of 'tex', making vim-latex not loaded.
-" Changes the default filetype back to 'tex':
-let g:tex_flavor='latex'
-
-"set output format and default viewer
-let g:Tex_DefaultTargetFormat = 'pdf'
-let g:Tex_ViewRule_pdf = 'evince'
-
 
 " tcl plugin
 " let tcl_extended_syntax=1
