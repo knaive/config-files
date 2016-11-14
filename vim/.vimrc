@@ -137,9 +137,11 @@ call vundle#begin(VIM_PATH . 'bundle')
 " original repos on github
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'scrooloose/nerdcommenter'
+
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'Lokaltog/vim-easymotion'
@@ -148,10 +150,10 @@ Plugin 'tpope/vim-surround'
 Plugin 'kshenoy/vim-signature'
 Plugin 'mattn/emmet-vim'
 Plugin 'vim-scripts/a.vim'
+
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'cocopon/iceberg.vim'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'godlygeek/csapprox' "color scheme for vim in terminal
 Plugin 'basilgor/vim-autotags'
 
@@ -239,8 +241,8 @@ let g:airline_theme = 'bubblegum'
 set t_Co=256
 let g:CSApprox_attr_map = {'bold':'bold','italic':'','sp':''}
 set background=dark
-" colorscheme iceberg
-colorscheme github
+colorscheme iceberg
+" colorscheme github
 
 "" vimOrganizer settings
 "===================================================================
