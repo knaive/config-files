@@ -243,8 +243,6 @@ set t_Co=256
 let g:CSApprox_attr_map = {'bold':'bold','italic':'','sp':''}
 set background=dark
 colorscheme iceberg
-" colorscheme darkeclipse
-" colorscheme inkpot
 " colorscheme github
 " colorscheme dawn
 
