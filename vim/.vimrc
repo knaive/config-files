@@ -149,6 +149,7 @@ Plugin 'kshenoy/vim-signature'
 Plugin 'mattn/emmet-vim'
 Plugin 'vim-scripts/a.vim'
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'cocopon/iceberg.vim'
 " Plugin 'ciaranm/inkpot'
 Plugin 'Valloric/YouCompleteMe'
@@ -233,9 +234,6 @@ endfunction
 " inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 
 
-" vimim settings
-" let g:vimim_cloud='google,sogou'
-
 " airline settings
 let g:airline_theme = 'bubblegum'
 
@@ -244,10 +242,10 @@ let g:airline_theme = 'bubblegum'
 set t_Co=256
 let g:CSApprox_attr_map = {'bold':'bold','italic':'','sp':''}
 set background=dark
+colorscheme iceberg
 " colorscheme darkeclipse
-" colorscheme iceberg
 " colorscheme inkpot
-colorscheme github
+" colorscheme github
 " colorscheme dawn
 
 " tcl plugin
