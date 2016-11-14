@@ -151,10 +151,8 @@ Plugin 'vim-scripts/a.vim'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'cocopon/iceberg.vim'
-" Plugin 'ciaranm/inkpot'
 Plugin 'Valloric/YouCompleteMe'
-" color scheme for vim in terminal
-Plugin 'godlygeek/csapprox'
+Plugin 'godlygeek/csapprox' "color scheme for vim in terminal
 Plugin 'basilgor/vim-autotags'
 
 call vundle#end()
@@ -194,7 +192,6 @@ let g:NERDSpaceDelims=1
 
 "youcompleteme settings
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
-
 
 "UltiSnips settings
 let g:UltiSnipsUsePythonVersion = 2
@@ -242,12 +239,8 @@ let g:airline_theme = 'bubblegum'
 set t_Co=256
 let g:CSApprox_attr_map = {'bold':'bold','italic':'','sp':''}
 set background=dark
-colorscheme iceberg
-" colorscheme github
-" colorscheme dawn
-
-" tcl plugin
-" let tcl_extended_syntax=1
+" colorscheme iceberg
+colorscheme github
 
 "" vimOrganizer settings
 "===================================================================
