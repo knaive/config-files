@@ -7,13 +7,6 @@ endif
 let VIMRC='~/.vimrc'
 let BAK_DIR = VIM_PATH . 'backup'
 
-"调用脚本生成tags和cscope.files
-"" execute the following commands in the project dir if the script is not existed
-"" find $PWD -name "*.c" -o -name "*.h" > cscope.files
-"" cscope -bkq cscope.files
-map <C-F12> :!cscope.sh
-map <C-F11> :cs add ~/.cscopedb/cscope.out
-
 "common command remappings
 "default leader key is \, remap that
 " let mapleader="\<space>"
@@ -23,6 +16,7 @@ exe 'nnoremap <leader>ev :e ' . VIMRC . '<CR>'
 exe 'nnoremap <leader>sv :so ' . VIMRC . '<CR>'
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <ESC>:w<CR>
+inoremap jj <ESC>
 "inoremap <C-e> <ESC>$a
 "nnoremap <C-e> $
 inoremap <C-a> <ESC>^i
@@ -137,25 +131,16 @@ call vundle#begin(VIM_PATH . 'bundle')
 " original repos on github
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'scrooloose/nerdcommenter'
-
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-surround'
-Plugin 'kshenoy/vim-signature'
 Plugin 'mattn/emmet-vim'
-Plugin 'vim-scripts/a.vim'
-
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'cocopon/iceberg.vim'
 Plugin 'godlygeek/csapprox' "color scheme for vim in terminal
-Plugin 'basilgor/vim-autotags'
 
 call vundle#end()
 
@@ -168,7 +153,7 @@ filetype plugin indent on
 let g:AutoPairsFlyMode = 1
 
 " supertab settings
-" let g:SuperTabDefaultCompletionType = "context" "自动检测需要补全什么内容
+let g:SuperTabDefaultCompletionType = "context" "自动检测需要补全什么内容
 
 " ctrlp mappings
 " <F5>             : update the cache for the current directory
@@ -192,46 +177,11 @@ nnoremap <Leader>mm :CtrlPMRU<CR>
 " nerdcommenter
 let g:NERDSpaceDelims=1
 
-"youcompleteme settings
-nnoremap <leader>jd :YcmCompleter GoTo<CR>
-
-"UltiSnips settings
-let g:UltiSnipsUsePythonVersion = 2
-let g:UltiSnipsExpandTrigger = "<C-j>"
-"let g:UltiSnipsListSnippets= "<C-l>"
-
 "***************auto complete plugins setting ends here**************
 
 " NERDTree settings
 nnoremap <silent> <Leader>tt :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
-
-" winmanager settings
-let g:winManagerWindowLayout='FileExplorer|TagList'
-nnoremap <silent> <Leader>wm :WMToggle<cr>
-
-" taglist settings
-let Tlist_Sort_Type = "name"            " sort by name
-let Tlist_Use_Right_Window = 0          " show the window on the right side
-let Tlist_Compact_Format = 1            " reduce the number of empty lines in the taglist window
-let Tlist_Exist_OnlyWindow = 1          " when one buffer left, close the window while killed the buffer
-let Tlist_File_Fold_Auto_Close = 0      " not close tags of other files
-let Tlist_Enable_Fold_Column = 0        " not show the fold tree
-nnoremap <silent> <Leader>tl :TlistToggle<CR>
-
-" extensions to the plugin godlygeek/tabular
-function! s:align()
-  let p = '^\s*|\s.*\s|\s*$'
-  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
-    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
-    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
-    Tabularize/|/l1
-    normal! 0
-    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
-  endif
-endfunction
-" inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
-
 
 " airline settings
 let g:airline_theme = 'bubblegum'
@@ -243,22 +193,6 @@ let g:CSApprox_attr_map = {'bold':'bold','italic':'','sp':''}
 set background=dark
 colorscheme iceberg
 " colorscheme github
-
-"" vimOrganizer settings
-"===================================================================
-" THE NECESSARY STUFF
-" The three lines below are necessary for VimOrganizer to work right
-" ==================================================================
-let g:ft_ignore_pat = '\.org'
-filetype plugin indent on
-" and then put these lines in vimrc somewhere after the line above
-au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
-au BufEnter *.org            call org#SetOrgFileType()
-" let g:org_capture_file = '~/org_files/mycaptures.org'
-command! OrgCapture :call org#CaptureBuffer()
-command! OrgCaptureFile :call org#OpenCaptureFile()
-syntax on
-
 
 ""settings for emmet
 let g:user_emmet_leader_key = '<C-e>'
