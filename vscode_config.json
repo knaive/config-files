@@ -1,0 +1,54 @@
+{
+    "editor.formatOnPaste": true,
+    "editor.fontSize": 20,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 500,
+    "window.zoomLevel": 0,
+    "editor.minimap.enabled": false,
+    "vim.disableAnnoyingNeovimMessage": true,
+    "vim.foldfix": true,
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j","j"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "vim.otherModesKeyBindingsNonRecursive": [
+        {
+            "before": ["<leader>","d"],
+            "after": ["d", "d"]
+        },
+        {
+            "before":["<C-n>"],
+            "after":[],
+            "commands": [
+                {
+                    "command": ":nohl"
+                }
+            ]
+        }
+    ],
+    "vim.leader": "<space>",
+    "vim.handleKeys":{
+        "<C-c>": false,
+        "<C-v>": false,
+        "<C-a>": false,
+        "<C-f>": false,
+        "<C-w>": false,
+        "<C-k>": false,
+        "<C-x>": false,
+        "<C-]>": false,
+        "<C-[>": false, 
+        "<C-n>": false,
+        "<C-j>": false
+    },
+    "workbench.colorTheme": "Abyss",
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\Sysnative\\bash.exe",
+    "workbench.startupEditor": "newUntitledFile",
+    "files.eol": "\n"
+}
